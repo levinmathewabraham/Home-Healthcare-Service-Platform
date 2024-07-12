@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #3FA2F6;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #3FA2F6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.cta-button:hover {
+    background-color: #0F67B1;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+    padding-top: 100px;
+}
+
+#floatingInput {
+    border-radius: 10px 10px 0px 0px;
+}
+
+#floatingPassword {
+    border-radius: 0px 0px 10px 10px;
+}
