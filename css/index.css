@@ -60,10 +60,18 @@ footer {
     padding-top: 100px;
 }
 
-#floatingInput {
+#floatingFullName {
     border-radius: 10px 10px 0px 0px;
 }
 
-#floatingPassword {
+#loginIdentifier {
+    border-radius: 10px 10px 0px 0px;
+}
+
+#loginPassword {
+    border-radius: 0px 0px 10px 10px;
+}
+
+#floatingRole {
     border-radius: 0px 0px 10px 10px;
 }
