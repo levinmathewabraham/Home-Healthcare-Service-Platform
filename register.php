@@ -26,7 +26,7 @@
                                     <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Dashboard</a>
+                                    <a class="nav-link" href="./dashboard_admin.php">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Doctors</a>
@@ -55,7 +55,7 @@
     </header>
 
     <main class="form-signin w-100 m-auto">
-        <form id="registerForm" action="./register.php" method="POST">
+        <form id="registerForm" action="./register.php" method="POST" class="needs-validation" novalidate>
             <h1 class="h3 mb-3 fw-normal">Register</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingFullName" name="fullname" placeholder="Full Name" required>
@@ -115,18 +115,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Server-side validation
     if (empty($fullname)) {
         $errors[] = "Full name is required.";
+    } elseif (!preg_match("/^[a-zA-Z ]*$/", $fullname)) {
+        $errors[] = "Invalid format. Only letters and spaces are allowed.";
     }
     
     if (empty($username)) {
         $errors[] = "Username is required.";
+    } elseif (!preg_match("/^[a-zA-Z0-9_]*$/", $username)) {
+        $errors[] = "Invalid username format. Only letters, numbers, and underscores are allowed.";
     }
-    
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+    if(empty($email)) {
+        $errors[] = "Email address is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
-    
-    if (strlen($password) < 6) {
-        $errors[] = "Password must be atleast 6 characters long.";
+
+    //Check if email already exists in database
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->bind_param("s",$email);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        $errors = "Email address already in use.";
+    }
+
+    if (empty($password)) {
+        $errors[] = "Password is required.";
+    } elseif (strlen($password) < 6) {
+        $errors[] = "Password must be at least 6 characters long.";
     }
 
     if (empty($role)) {
@@ -144,19 +161,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //Statement execution
         if($stmt->execute()) {
+            //Show alert box and redirect to connection.php after successful registration
             echo "<script>alert('Registration Successful.'); window.location.href = 'connection.php';</script>";
         } else {
             echo "<script>alert('Error: ".$stmt->error."');</script>";
         }
-
-        //Close connection
-        $stmt->close();
     } else {
         //Display errors
         foreach ($errors as $error) {
             echo "<script>alert('$error');</script>";
         }
     }
-    $conn->close();
+    //Close connection
+    $stmt->close();
 }
+$conn->close();
 ?>

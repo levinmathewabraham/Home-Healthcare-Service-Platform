@@ -1,5 +1,79 @@
 <?php
+require('connection.php');
 session_start();
+
+$errors = [];
+
+//Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $identifier = '';
+    $password = '';
+
+    if (isset($_POST['identifier'])) {
+        $identifier = trim($_POST['identifier']);
+    } else {
+        $errors[] = "Username or email is required.";
+    }
+
+    if (isset($_POST['password'])) {
+        $password = $_POST['password'];
+    } else {
+        $errors[] = "Password is required.";
+    }
+
+    if(empty($errors)) {
+        //Check if identifier is username or email
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $stmt = "SELECT id, username, password, role FROM users WHERE email = ?";
+        } else {
+            $stmt = "SELECT id, username, password, role FROM users WHERE username = ?";
+        }
+
+        //Prepare and bind
+        if ($stmt = $conn->prepare($stmt)) {
+            $stmt->bind_param("s", $identifier);
+            $stmt->execute();
+            $stmt->store_result();
+
+            //Check if user exists
+            if ($stmt->num_rows === 1) {
+                $stmt->bind_result($id, $username, $hashed_password, $role);
+                $stmt->fetch();
+
+                if (password_verify($password, $hashed_password)) {
+                    $_SESSION['user_id'] = $id;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['role'] = $role;
+
+                    //Redirect to dashboard after logging in
+                    switch ($role) {
+                        case 'patient':
+                            header("Location: dashboard_patient.php");
+                            break;
+                        case 'doctor':
+                            header("Location: dashboard_doctor.php");
+                            break;
+                        case 'admin':
+                            header("Location: dashboard_admin.php");
+                            break;
+                        default:
+                            header("Location: login.php");
+                            break;
+                    }
+                    exit();
+                } else {
+                    $errors[] = "Invalid password.";
+                }
+            } else {
+                $errors[] = "Invalid username or email!";
+            }
+            $stmt->close();
+        } else {
+            $errors[] = "Database query failed.";
+        }
+    }
+}
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +104,7 @@ session_start();
                                     <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Dashboard</a>
+                                    <a class="nav-link" href="./dashboard_admin.php">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Doctors</a>
@@ -59,8 +133,19 @@ session_start();
     </header>
 
     <main class="form-signin w-100 m-auto">
-        <form action="./connection.php" method="POST">
+        <form action="./login.php" method="POST" novalidate>
             <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+            <?php
+                if (!empty($errors)) {
+                    echo "<div class = 'alert alert-danger' role = 'alert'>";
+                    foreach ($errors as $error) {
+                        echo $error . '<br>';
+                    }
+                    echo "</div>";
+                }
+            ?>
+
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="loginIdentifier" name="identifier" placeholder="Username or Email" required>
                 <label for="loginIdentifier">Username or Email</label>
@@ -85,50 +170,3 @@ session_start();
     <script src="./js/index.js"></script>
 </body>
 </html>
-
-<?php
-//Include database connection script
-include 'connection.php';
-
-//Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Collect form data
-    $identifier = trim($_POST['identifier']);
-    $password = $_POST['password'];
-
-    //Check if identifier is username or email
-    if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-        $stmt = "SELECT id, username, password, role FROM users WHERE email = ?";
-    } else {
-        $stmt = "SELECT id, username, password, role FROM users WHERE username = ?";
-    }
-
-    //Prepare and bind
-    $stmt = $conn->prepare($stmt);
-    $stmt->bind_param("s", $identifier);
-
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $username, $hashed_password, $role);
-        $stmt->fetch();
-
-        if (password_verify($password, $hashed_password)) {
-            session_start();
-            $_SESSION['user_id'] = $id;
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-
-            header("Location: connection.php");
-            exit();
-        } else {
-            echo "Invalid password.";
-        }
-    } else {
-        echo "Invalid username or email!";
-    }
-    $stmt->close();
-}
-$conn->close();
-?>

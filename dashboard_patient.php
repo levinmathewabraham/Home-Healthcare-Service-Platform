@@ -1,12 +1,3 @@
-<?php
-session_start();
-if($_SESSION['role'] != 'patient') {
-    header("Location: login.html");
-    exit();
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,3 +28,10 @@ if($_SESSION['role'] != 'patient') {
     <script src="./js/index.js"></script>
 </body>
 </html>
+
+<?php
+if($_SESSION['role'] != 'patient') {
+    header("Location: login.php");
+    exit();
+}
+?>
