@@ -1,57 +1,89 @@
-body {
-    font-family: Arial, sans-serif;
+html,body{
+    font-family: "Titillium Web", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-header {
-    background-color: #3FA2F6;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 1rem;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 main {
     padding: 2rem;
+    flex-grow: 1;
+}
+
+.navbar {
+    background-color: #3FA2F6;
+}
+
+.navbar-brand img.logo {
+    height: 40px;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: black;
+}
+
+.loginRegister .btn {
+    margin-left: 5px;
+}
+
+.userLogOut .btn {
+    margin-left: 5px;
+}
+
+/* Register & Login CSS */
+.loginRegister > a {
+    background-color: #f1f1f1;
+    text-decoration: none;
+    color: black;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.loginRegister > a:hover {
+    background-color: #82b2f2;
+}
+
+.admin-greeting {
+    text-align: center;
+}
+
+.dash-items:hover {
+    background-color: cadetblue;
+    color: black;
+}
+
+.home-img1 {
+    width: 600px;
 }
 
 .cta-button {
-    display: inline-block;
-    padding: 1rem 2rem;
     background-color: #3FA2F6;
-    color: white;
     text-decoration: none;
+    color: white;
     border-radius: 5px;
-    margin-top: 1rem;
+    padding: 10px;
 }
 
 .cta-button:hover {
     background-color: #0F67B1;
-}
-
-footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    text-decoration: none;
 }
 
 .form-signin {
@@ -74,4 +106,10 @@ footer {
 
 #floatingRole {
     border-radius: 0px 0px 10px 10px;
+}
+
+footer {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    text-align: center;
 }
