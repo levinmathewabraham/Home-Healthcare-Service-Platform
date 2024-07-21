@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <header>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -13,15 +19,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./index.php">HOME</a>
                         </li>
-                        <!-- To be removed -->
                         <li class="nav-item">
-                            <a class="nav-link" href="./dashboard_admin.php">AdminDash</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./dashboard_doctor.php">DocDash</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./dashboard_patient.php">PatDash</a>
+                            <a class="nav-link" href="./dashboard_redirect.php">DASHBOARD</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">SERVICES</a>
@@ -35,7 +34,7 @@
                     </ul>
                 </div>
                 <?php
-                if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+                if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
                     //Change login and register buttons to logout
                     echo "
                     <div class='userLogOut navbar-text'>

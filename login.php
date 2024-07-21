@@ -1,6 +1,26 @@
 <?php
-require('./connection.php');
+include 'connection.php';
 session_start();
+
+//Check if user is already logged in
+if (isset($_SESSION['user_id'])) {
+    // Redirect based on user role if already logged in
+    switch ($_SESSION['role']) {
+        case 'patient':
+            header('Location: dashboard_patient.php');
+            break;
+        case 'doctor':
+            header('Location: dashboard_doctor.php');
+            break;
+        case 'admin':
+            header('Location: dashboard_admin.php');
+            break;
+        default:
+            header('Location: login.php');
+            break;
+    }
+    exit();
+}
 
 $errors = [];
 
@@ -24,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($errors)) {
         //Check if identifier is username or email
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-            $stmt = "SELECT id, username, password, role FROM users WHERE email = ?";
+            $stmt = "SELECT id, fullname, username, password, role FROM users WHERE email = ?";
         } else {
-            $stmt = "SELECT id, username, password, role FROM users WHERE username = ?";
+            $stmt = "SELECT id, fullname, username, password, role FROM users WHERE username = ?";
         }
 
         //Prepare and bind
@@ -37,16 +57,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //Check if user exists
             if ($stmt->num_rows === 1) {
-                $stmt->bind_result($id, $username, $hashed_password, $role);
+                $stmt->bind_result($id, $fullname, $username, $hashed_password, $role);
                 $stmt->fetch();
 
                 if (password_verify($password, $hashed_password)) {
                     $_SESSION['loggedIn'] = true;
                     $_SESSION['user_id'] = $id;
+                    $_SESSION['fullname'] = $fullname;
                     $_SESSION['username'] = $username;
                     $_SESSION['role'] = $role;
 
-                    //Redirect to dashboard after logging in
+                    //Redirect to appropriate dashboard after logging in
                     switch ($role) {
                         case 'patient':
                             header("Location: dashboard_patient.php");
@@ -100,7 +121,7 @@ $conn->close();
                     if (!empty($errors)) {
                         echo "<div class = 'alert alert-danger' role = 'alert'>";
                         foreach ($errors as $error) {
-                            echo $error . '<br>';
+                            echo "<p>$error</p><br>";
                         }
                         echo "</div>";
                     }

@@ -1,6 +1,32 @@
 <?php
-require('./connection.php');
 session_start();
+include 'connection.php';
+
+//Check if user is logged in
+if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+//Redirect user based on role
+$role = $_SESSION['role'];
+switch ($role) {
+    case 'admin':
+        //Admin stays on this page
+        break;
+    case 'doctor':
+        header('Location: dashboard_doctor.php');
+        exit();
+    case 'patient':
+        header('Location: dashboard_patient.php');
+        exit();
+    default:
+        header('Location: login.php');
+        exit();
+}
+
+//Fetch admin details or any necessary data
+$admin_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +47,7 @@ session_start();
         <main>
             <?php
             if(isset($_SESSION['loggedIn'])) {
-                echo "<h1 class = 'admin-greeting'>WELCOME - $_SESSION[username]</h1> ";
+                echo "<h1 class = 'admin-greeting'>WELCOME, " . $_SESSION['fullname'] . "</h1> ";
             }
             ?>
 

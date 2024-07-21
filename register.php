@@ -1,4 +1,3 @@
-
 <?php
 //Include database connection script
 include 'connection.php';
@@ -38,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows > 0) {
-        $errors = "Email address already in use.";
+        $errors[] = "Email address already in use.";
     }
 
     if (empty($password)) {
@@ -63,7 +62,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         //Statement execution
         if($stmt->execute()) {
             //Show alert box and redirect to connection.php after successful registration
-            echo "<script>alert('Registration Successful.'); window.location.href = 'connection.php';</script>";
+            echo "<script>alert('Registration Successful.'); window.location.href = 'login.php';</script>";
         } else {
             echo "<script>alert('Error: ".$stmt->error."');</script>";
         }
