@@ -8,23 +8,6 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-//Redirect user based on role
-$role = $_SESSION['role'];
-switch ($role) {
-    case 'admin':
-        //Admin stays on this page
-        break;
-    case 'doctor':
-        header('Location: dashboard_doctor.php');
-        exit();
-    case 'patient':
-        header('Location: dashboard_patient.php');
-        exit();
-    default:
-        header('Location: login.php');
-        exit();
-}
-
 //Fetch admin details or any necessary data
 $admin_id = $_SESSION['user_id'];
 ?>
@@ -43,47 +26,63 @@ $admin_id = $_SESSION['user_id'];
     <!-- Include header section -->
     <?php require_once './include/header.php' ?>
 
-    <div class="wrapper">
-        <main>
+    <div class="wrapper container-fluid">
+        <div class="row">
             <?php
             if(isset($_SESSION['loggedIn'])) {
                 echo "<h1 class = 'admin-greeting'>WELCOME, " . $_SESSION['fullname'] . "</h1> ";
             }
             ?>
 
-            <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <nav id="sidebarMenu" class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
                 <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                    <div class=" position-sticky offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                                    Manage Users
+                                    My Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                                    User Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Manage Appointments
+                                    Appointment Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Manage Medical Records
+                                    Medical Records Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    View Analytics
+                                    Doctor Management
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                                    Patient Management
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </main>
+            </nav>
+
+            <!-- Main Dashboard Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Admin Dashboard</h1>
+                </div>
+                <div class="dashboard-content">
+
+                </div>
+            </main>
+        </div>
     </div>
     
     <?php require_once './include/footer.php'?>

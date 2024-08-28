@@ -20,12 +20,27 @@ main {
     flex-grow: 1;
 }
 
-.navbar {
-    background-color: #3FA2F6;
+/* Header */
+.info-tab {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    background-color: #071952;
+    color: white;
 }
 
-.navbar-brand img.logo {
-    height: 40px;
+.info-tab p {
+    margin: 0;
+}
+
+.navbar {
+    background-color: #0B666A;
+}
+
+.logo {
+    width: 100px;
+    background-color: white;
+    border-radius: 13px;
 }
 
 .navbar-nav .nav-link {
@@ -35,7 +50,7 @@ main {
 }
 
 .navbar-nav .nav-link:hover {
-    color: black;
+    color: #071952;
 }
 
 .loginRegister .btn {
@@ -46,44 +61,18 @@ main {
     margin-left: 5px;
 }
 
-/* Register & Login CSS */
+/* Register & Login */
 .loginRegister > a {
     background-color: #f1f1f1;
     text-decoration: none;
     color: black;
-    border: 1px solid;
     border-radius: 5px;
     padding: 7px;
 }
 
 .loginRegister > a:hover {
-    background-color: #82b2f2;
-}
-
-.admin-greeting {
-    text-align: center;
-}
-
-.dash-items:hover {
-    background-color: cadetblue;
-    color: black;
-}
-
-.home-img1 {
-    width: 270px;
-}
-
-.cta-button {
-    background-color: #3FA2F6;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.cta-button:hover {
-    background-color: #0F67B1;
-    text-decoration: none;
+    background-color: #35A29F;
+    color: #071952;
 }
 
 .form-signin {
@@ -108,8 +97,59 @@ main {
     border-radius: 0px 0px 10px 10px;
 }
 
+/* Welcome - index */
+#home-section h1 {
+    font-size: 60px;
+}
+
+#home-section h6 {
+    font-size: 20px;
+}
+
+.cta-button {
+    background-color: #35A29F;
+    text-decoration: none;
+    color: white;
+}
+
+.cta-button:hover {
+    background-color: #0B666A;
+    text-decoration: none;
+    color: white;
+}
+
+/* Services - index */
+#services-section h2 {
+    font-size: 45px;
+}
+
+/* Doctors - index */
+#doctors-section h2 {
+    font-size: 45px;
+}
+
+/* Dashboard */
+.dash-items:hover {
+    background-color: cadetblue;
+    color: black;
+}
+
+.admin-greeting {
+    text-align: center;
+}
+
+.doctor-greeting {
+    text-align: center;
+}
+
+.patient-greeting {
+    text-align: center;
+}
+
+/* Footer */
 footer {
-    background-color: #f1f1f1;
+    background-color: #0B666A;
+    color: white;
     padding: 1rem;
     text-align: center;
 }

@@ -95,7 +95,7 @@ $conn->close();
     <div class="wrapper">
         <main class="form-signin w-100 m-auto">
             <form id="registerForm" action="./register.php" method="POST" class="needs-validation" novalidate>
-                <h1 class="h3 mb-3 fw-normal">Register</h1>
+                <h1 class="h3 mb-3 fw-normal">Create an Account</h1>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingFullName" name="fullname" placeholder="Full Name" required>
                     <label for="floatingFullName">Full Name</label>

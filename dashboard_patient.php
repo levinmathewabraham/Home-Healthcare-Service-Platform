@@ -1,10 +1,15 @@
 <?php
 session_start();
+include 'connection.php';
+
 //Check if user is logged in
 if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'patient') {
     header('Location: login.php');
     exit();
 }
+
+//Fetch admin details or any necessary data
+$patient_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -21,47 +26,74 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'patient') {
     <!-- Include header section -->
     <?php require_once './include/header.php' ?>
 
-    <div class="wrapper">
-        <main>
+    <div class="wrapper container-fluid">
+        <div class="row">
             <?php
             if(isset($_SESSION['loggedIn'])) {
                 echo "<h1 class = 'patient-greeting'>WELCOME, " . $_SESSION['fullname'] . "</h1> ";
             }
             ?>
 
-            <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <nav id="sidebarMenu" class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
                 <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                    <div class=" position-sticky offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                                    Manage Profile
+                                    My Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                                    Profile Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Book Appointment
+                                    Appointment Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    View Medical Records
+                                    Medical Records
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
+                                    Prescriptions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                                    Billing and Payments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                                    Health Tips and Resources
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </main>
+            </nav>
+
+            <!-- Main Dashboard Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Patient Dashboard</h1>
+                </div>
+                <div class="dashboard-content">
+                    
+                </div>
+            </main>
+        </div>
     </div>
     
     <?php require_once './include/footer.php'?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>

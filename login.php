@@ -115,7 +115,7 @@ $conn->close();
     <div class="wrapper">
         <main class="form-signin w-100 m-auto">
             <form action="./login.php" method="POST" novalidate>
-                <h1 class="h3 mb-3 fw-normal">Login</h1>
+                <h1 class="h3 mb-3 fw-normal">Sign In</h1>
 
                 <?php
                     if (!empty($errors)) {
