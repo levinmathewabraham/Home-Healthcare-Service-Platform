@@ -44,13 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($errors)) {
         //Check if identifier is username or email
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-            $stmt = "SELECT id, fullname, username, password, role FROM users WHERE email = ?";
+            $stmt = $conn->prepare("SELECT id, fullname, username, password, role FROM users WHERE email = ?");
         } else {
-            $stmt = "SELECT id, fullname, username, password, role FROM users WHERE username = ?";
+            $stmt = $conn->prepare("SELECT id, fullname, username, password, role FROM users WHERE username = ?");
         }
 
         //Prepare and bind
-        if ($stmt = $conn->prepare($stmt)) {
+        if ($stmt) {
             $stmt->bind_param("s", $identifier);
             $stmt->execute();
             $stmt->store_result();

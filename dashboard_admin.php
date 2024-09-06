@@ -79,7 +79,35 @@ $admin_id = $_SESSION['user_id'];
                     <h1 class="h2">Admin Dashboard</h1>
                 </div>
                 <div class="dashboard-content">
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-bg-primary mb-3">
+                                <div class="card-header">Total Users</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">-user count-</h5>
+                                    <p class="card-text">Registered users in the system.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-bg-success mb-3">
+                                <div class="card-header">Appointments Today</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">-appointment count-</h5>
+                                    <p class="card-text">Appointments scheduled for today.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-bg-danger mb-3">
+                                <div class="card-header">Pending Requests</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">-requests count-</h5>
+                                    <p class="card-text">Pending approval from admin.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

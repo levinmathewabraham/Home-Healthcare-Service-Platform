@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                         <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
-                    </svg>&nbsp;help@hhs.com &nbsp;
+                    </svg>&nbsp;help@hhs.org &nbsp;
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                     </svg>24/7
@@ -71,11 +71,11 @@ if (session_status() === PHP_SESSION_NONE) {
                     </ul>
                 </div>
                 <?php
-                if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+                if (isset($_SESSION['loggedIn']) == true) {
                     //Change login and register buttons to logout
                     echo "
                     <div class='userLogOut navbar-text'>
-                        $_SESSION[username] - <a href='./logout.php' class='btn btn-outline-secondary btn-sm'>Log Out</a>
+                        <span class = 'loggedInUser'>$_SESSION[username]</span> - <a href='./logout.php' class='logoutButton btn btn-sm'>Log Out</a>
                     </div>";
                 } else {
                     //Keep login and register buttons on the page

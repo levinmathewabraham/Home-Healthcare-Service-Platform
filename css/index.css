@@ -25,7 +25,7 @@ main {
     display: flex;
     justify-content: space-between;
     margin: 0;
-    background-color: #071952;
+    background-color: #35A29F;
     color: white;
 }
 
@@ -75,6 +75,18 @@ main {
     color: #071952;
 }
 
+.loggedInUser {
+    color: white;
+}
+
+.logoutButton {
+    background-color: #35A29F;
+}
+
+.logoutButton:hover {
+    background-color: white;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 1rem;
@@ -99,11 +111,11 @@ main {
 
 /* Welcome - index */
 #home-section h1 {
-    font-size: 60px;
+    font-size: 4rem;
 }
 
 #home-section h6 {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .cta-button {
@@ -120,12 +132,12 @@ main {
 
 /* Services - index */
 #services-section h2 {
-    font-size: 45px;
+    font-size: 3rem;
 }
 
 /* Doctors - index */
 #doctors-section h2 {
-    font-size: 45px;
+    font-size: 3rem;
 }
 
 /* Dashboard */

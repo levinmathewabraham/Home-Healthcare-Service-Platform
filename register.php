@@ -40,6 +40,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Email address already in use.";
     }
 
+    //Check if username already exists in the database
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt->bind_param("s",$username);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        $errors[] = "Username already taken.";
+    }
+
     if (empty($password)) {
         $errors[] = "Password is required.";
     } elseif (strlen($password) < 6) {

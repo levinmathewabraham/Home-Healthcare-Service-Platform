@@ -84,7 +84,56 @@ $patient_id = $_SESSION['user_id'];
                     <h1 class="h2">Patient Dashboard</h1>
                 </div>
                 <div class="dashboard-content">
-                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Schedule Appointment</h3>
+                            <form method="POST" action="#">
+                                <div class="mb-3">
+                                    <label for="doctor" class="form-label">Select Doctor</label>
+                                    <select name="doctor_id" id="doctor" class="form-select" required>
+                                        <?php
+                                        $result = $conn->query("SELECT id, fullname FROM users WHERE role = 'doctor'");
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<option value = '{$row['id']}'>{$row['fullname']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="appointment_date" class="form-label">Appointment Date & Time</label>
+                                    <input type="datetime-local" id="appointment_date" name="appointment_date" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-info">Schedule</button>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-bg-info mb-3 h-100">
+                                <div class="card-header">Upcoming Appointments</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Next Appointment: <br>-time-,-date- </h5>
+                                    <p class="card-text">Lorem ipsum</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-bg-warning mb-3 h-100">
+                                <div class="card-header">Pending Payments</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Amount Due: -amount-</h5>
+                                    <p class="card-text">Payment for the last consultation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-bg-success mb-3 h-100">
+                                <div class="card-header">Recent Prescriptions</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Prescription from -date-</h5>
+                                    <p class="card-text">-prescription details-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
