@@ -7,13 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname = $_POST['fullname'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    // ... other fields
 
     // Sanitize input data
     $fullname = htmlspecialchars($fullname);
     $username = htmlspecialchars($username);
     $email = htmlspecialchars($email);
-    // ... other fields
 
     $patient_id = $_SESSION['user_id'];
 
