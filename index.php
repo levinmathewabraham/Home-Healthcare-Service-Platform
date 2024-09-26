@@ -30,7 +30,7 @@
                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"/>
                         <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"/>
                     </svg>
-                    <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="mt-2">Our dedicated team is always available to provide compassionate and reliable care for you and your loved ones.</p>
                 </div>
             </section>
 
@@ -41,7 +41,9 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Emergency Help</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">Our emergency response team consists of highly trained healthcare professionals 
+                                        who are committed to providing prompt and effective care. We prioritize patient safety and well-being 
+                                        in every situation.</p>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +51,7 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Modern Pharmacy</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">We can help you manage your medications and ensure you receive timely refills. We prioritize medication safety and follow strict protocols to prevent errors.</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +59,8 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Medical Treatment</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">We are dedicated to providing the highest quality of care to our patients. Our team of skilled healthcare 
+                                        professionals is committed to following evidence-based practices and adhering to strict safety standards.</p>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +75,7 @@
                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"/>
                         <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"/>
                     </svg>
-                    <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="mt-2">Experience convenient and personalized home healthcare services. We offer a wide range of services to meet your needs.</p>
                 </div>
             </section>
 
@@ -84,7 +87,7 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Appointment Booking</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">Book your home healthcare appointments conveniently online. Our user-friendly booking system allows you to select your preferred date and time, choose a suitable healthcare provider, and receive timely appointment confirmations.</p>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +95,7 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Home Checkups</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">Our dedicated team of healthcare professionals is committed to providing comprehensive home checkups tailored to your specific needs. We understand that visiting a healthcare facility can be inconvenient. That's why we offer the convenience and comfort of home-based checkups.</p>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +103,7 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Online Payments</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p class="mx-5 mb-5">We offer a variety of secure and convenient payment options to make it easy for you to pay for our services. Your payment information is always handled securely. We use industry-standard encryption to protect your personal and financial data.</p>
                                 </div>
                             </div>
                         </div>
@@ -115,45 +118,30 @@
                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"/>
                         <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"/>
                     </svg>
-                    <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="mt-2">Our commitment to hygiene extends beyond our clinic. We ensure a sterile environment in every home we visit, safeguarding your health and well-being.</p>
                 </div>
             </section>
 
             <section id="doctors-section">
                 <div class="container text-center py-5 my-5">
                     <h2>Our Top Doctors</h2>
-                    <div class="row row-cols-1 row-cols-md-4 g-4 my-5">
+                    <div class="row row-cols-1 row-cols-md-2 g-4 my-5">
                         <div class="col">
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
-                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. John Doe</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. Saju P Varghese</h3>
+                                    <p class="mx-5 mb-5">He is a highly skilled and compassionate physician with extensive experience. With a focus on patient-centered care, Dr. Varghese is dedicated to providing personalized and comprehensive healthcare services.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
-                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. TBA</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. Sreehari C S</h3>
+                                    <p class="mx-5 mb-5">He is a talented and dedicated physician specializing in psychiatry. Dr. Sreehari is passionate about providing high-quality care to patients of all ages. He is committed to staying up-to-date with the latest medical advancements and utilizing evidence-based practices in his clinical work.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card h-100 rounded-4 shadow-lg">
-                                <div class="d-flex flex-column h-100">
-                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. TBA</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100 rounded-4 shadow-lg">
-                                <div class="d-flex flex-column h-100">
-                                    <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Dr. TBA</h3>
-                                    <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,7 +149,7 @@
 
             <section>
                 <div class="container text-center">
-                    <h3 class="mt-5 pt-5 pb-3">We Are Always Ready To Help You.
+                    <h3>We Are Always Ready To Help You.
                         <br>
                         Book An Appointment Now!
                     </h3>
@@ -169,7 +157,7 @@
                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"/>
                         <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"/>
                     </svg>
-                    <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="mt-2">Contact us today to learn more about our medical treatment services and how we can help you achieve optimal health and well-being.</p>
                     <a href="./register.php" class="btn btn-lg cta-button mb-5">Book an Appointment</a>
                 </div>
             </section>

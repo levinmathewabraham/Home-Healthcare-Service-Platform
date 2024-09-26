@@ -128,8 +128,6 @@ $conn->close();
                 <div class="form-floating mb-3">
                     <select class="form-control" id="floatingRole" name="role" required>
                         <option value="patient">Patient</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="admin">Admin</option>
                     </select>
                     <label for="floatingRole">Role</label>
                 </div>

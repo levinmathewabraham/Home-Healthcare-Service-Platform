@@ -26,5 +26,6 @@ switch ($_SESSION['role']) {
         header('Location: login.php');
         break;
 }
+
 exit();
 ?>

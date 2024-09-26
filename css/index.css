@@ -39,8 +39,9 @@ main {
 
 .logo {
     width: 100px;
+    padding: 0px;
     background-color: white;
-    border-radius: 13px;
+    border-radius: 30px;
 }
 
 .navbar-nav .nav-link {

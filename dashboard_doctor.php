@@ -2,20 +2,126 @@
 session_start();
 include 'connection.php';
 
-//Check if user is logged in
+//Check if logged in user is doctor
 if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'doctor') {
     header('Location: login.php');
     exit();
 }
 
-//Fetch admin details or any necessary data
+// Fetch today's appointments count
+$query_today_appointments = "SELECT COUNT(*) AS total FROM appointments WHERE appointment_date = CURDATE()";
+$result_today_appointments = $conn->query($query_today_appointments);
+$total_today_appointments = $result_today_appointments->fetch_assoc()['total'];
+
+//Fetch doctor details or any necessary data
 $doctor_id = $_SESSION['user_id'];
 
-//Fetch doctor data
-$stmt = $conn->prepare("SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date = CURDATE()");
+//Fetch all appointments linked to the doctor
+$query_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, appointments.status, patients.fullname AS patient_name 
+                        FROM appointments
+                        JOIN users AS patients ON appointments.patient_id = patients.id
+                        WHERE appointments.doctor_id = ?
+                        ORDER BY appointments.appointment_date DESC, appointments.appointment_time DESC";
+$stmt = $conn->prepare($query_appointments);
 $stmt->bind_param("i", $doctor_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$result_appointments = $stmt->get_result();
+
+// Check for errors in fetching appointments
+if (!$result_appointments) {
+    $_SESSION['error'] = "Error fetching appointments.";
+}
+
+//Appointments processing
+$appointments = [];
+while ($row = $result_appointments->fetch_assoc()) {
+    $appointments[] = $row;
+}
+
+// Fetch only the appointments that the doctor has accepted
+$query_accepted_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, appointments.status,
+                                       patients.fullname AS patient_name 
+                                FROM appointments
+                                JOIN users AS patients ON appointments.patient_id = patients.id
+                                WHERE appointments.accepted_by_doctor_id = ? AND appointments.is_accepted = 1";
+$stmt_accepted_appointments = $conn->prepare($query_accepted_appointments);
+$stmt_accepted_appointments->bind_param('i', $doctor_id);
+$stmt_accepted_appointments->execute();
+$result_accepted_appointments = $stmt_accepted_appointments->get_result();
+
+// Handle appointment status updates
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment_id'], $_POST['status'])) {
+    $appointment_id = $_POST['appointment_id'];
+    $new_status = $_POST['status'];
+
+    $stmt = $conn->prepare("UPDATE appointments SET status = ? WHERE id = ?");
+    $stmt->bind_param('si', $new_status, $appointment_id);
+
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Appointment status updated successfully.";
+    } else {
+        $_SESSION['error'] = "Error updating appointment status!";
+    }
+
+    $stmt->close();
+
+    // Redirect back to the dashboard to refresh the appointment list
+    header('Location: dashboard_doctor.php');
+    exit();
+}
+
+// Fetch appointments and check if a notification has been sent about doctor changes
+$query_new_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, 
+                        IF(appointments.accepted_by_doctor_id = doctors.id, 0, 1) AS doctor_changed,
+                        IF(appointments.notification_sent = 1, 'yes', 'no') AS notification_sent,
+                        appointments.is_accepted,
+                        IFNULL(doctors.fullname, 'Pending Acceptance') AS doctor_name
+                        FROM appointments 
+                        LEFT JOIN users AS doctors ON appointments.accepted_by_doctor_id = doctors.id
+                        WHERE appointments.patient_id = ?
+                        ORDER BY appointments.appointment_date ASC";
+$stmt_appointments = $conn->prepare($query_new_appointments);
+$stmt_appointments->bind_param("i", $patient_id);
+$stmt_appointments->execute();
+$result = $stmt_appointments->get_result();
+
+//Fetch the first appointment
+$nextAppointment = $result->fetch_assoc();
+
+// Fetch pending appointments
+$query_pending_appointments = "SELECT * FROM appointments WHERE status = 'pending'";
+$result_pending_appointments = $conn->query($query_pending_appointments);
+
+// Fetch pending appointments where no doctor has accepted yet
+$query_pending_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, patients.fullname AS patient_name 
+                               FROM appointments
+                               JOIN users AS patients ON appointments.patient_id = patients.id
+                               WHERE appointments.doctor_id = ? AND appointments.is_accepted = 0";
+$stmt_pending_appointments = $conn->prepare($query_pending_appointments);
+$stmt_pending_appointments->bind_param('i', $_SESSION['user_id']); // Assuming the logged-in doctor
+$stmt_pending_appointments->execute();
+$result_pending_appointments = $stmt_pending_appointments->get_result();
+
+//Fetch medical records
+$query_medicalrecords = "SELECT medical_records.id, patients.fullname AS patient_name, medical_records.visit_date, medical_records.diagnosis, medical_records.treatment, medical_records.prescription
+                        FROM medical_records
+                        JOIN users AS patients ON medical_records.patient_id = patients.id
+                        WHERE medical_records.doctor_id = ?
+                        ORDER BY medical_records.visit_date DESC";
+$stmt = $conn->prepare($query_medicalrecords);
+$stmt->bind_param('i', $doctor_id);
+$stmt->execute();
+$result_medicalrecords = $stmt->get_result();
+
+// Check for errors in fetching medical records
+if (!$result_medicalrecords) {
+    $_SESSION['error'] = "Error fetching medical records.";
+}
+
+$medicalrecords = [];
+while ($row = $result_medicalrecords->fetch_assoc()) {
+    $medicalrecords[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,44 +142,11 @@ $result = $stmt->get_result();
         <div class="row">
             <?php
             if(isset($_SESSION['loggedIn'])) {
-                echo "<h1 class = 'admin-greeting'>WELCOME, Dr. " . $_SESSION['fullname'] . "</h1> ";
+                echo "<h1 class = 'admin-greeting'>Welcome, Dr. " . $_SESSION['fullname'] . "</h1> ";
             }
             ?>
 
-            <nav id="sidebarMenu" class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-                <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                    <div class=" position-sticky offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                                    My Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dash-items nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                                    Patient Management
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Appointment Management
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Medical Records Management
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dash-items nav-link d-flex align-items-center gap-2" href="#">
-                                    Prescription Management
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+            
             <!-- Main Dashboard Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -85,7 +158,7 @@ $result = $stmt->get_result();
                             <div class="card text-bg-info mb-3">
                                 <div class="card-header">Appointments</div>
                                 <div class="card-body">
-                                    <h5 class="card-title">-appointments count-</h5>
+                                    <h5 class="card-title"><?php echo htmlspecialchars($total_today_appointments); ?></h5>
                                     <p class="card-text">Upcoming appointments for today.</p>
                                 </div>
                             </div>
@@ -110,6 +183,120 @@ $result = $stmt->get_result();
                         </div>
                     </div>
                 </div>
+                <div class="container">
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+                <?php endif; ?>
+                
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+                <?php endif; ?>
+                    <h2>My Appointments</h2>
+                    <?php if ($result_accepted_appointments->num_rows > 0): ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Appointment Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($appointment = $result_accepted_appointments->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($appointment['patient_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['appointment_time']); ?></td>
+                                <td>
+                                    <form id="appointment_status_form_<?php echo $appointment['id']; ?>" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                        <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
+                                        <select name="status" onchange="updateStatus(this.value, <?php echo $appointment['id']; ?>)">
+                                            <option value="pending" <?php if ($appointment['status'] === 'pending') echo 'selected'; ?>>Pending</option>
+                                            <option value="scheduled" <?php if ($appointment['status'] === 'scheduled') echo 'selected'; ?>>Scheduled</option>
+                                            <option value="completed" <?php if ($appointment['status'] === 'completed') echo 'selected'; ?>>Completed</option>
+                                            <option value="canceled" <?php if ($appointment['status'] === 'canceled') echo 'selected'; ?>>Canceled</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <p>No appointments found.</p>
+                    <?php endif; ?>
+                </div>
+                <div class="container">
+                    <h3>Pending Appointments</h3>
+                    <?php if ($result_pending_appointments->num_rows > 0): ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($appointment = $result_pending_appointments->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($appointment['patient_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($appointment['appointment_time']); ?></td>
+                                        <td>
+                                            <form method="POST" action="manage_appointment.php">
+                                                <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
+                                                <button type="submit" name="accept" class="btn btn-success">Accept</button>
+                                                <button type="submit" name="ignore" class="btn btn-danger">Ignore</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <p>No pending appointments.</p>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="container">
+                    <h2>Medical Records</h2>
+                    <?php if ($result_medicalrecords->num_rows > 0): ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Visit Date</th>
+                                <th>Diagnosis</th>
+                                <th>Treatment</th>
+                                <th>Prescription</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Display Medical Records -->
+                            <?php foreach($medicalrecords as $record): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($record['patient_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($record['visit_date']); ?></td>
+                                    <td><?php echo htmlspecialchars($record['diagnosis']); ?></td>
+                                    <td><?php echo htmlspecialchars($record['treatment']); ?></td>
+                                    <td><?php echo htmlspecialchars($record['prescription']); ?></td>
+                                    <td>
+                                        <a href="edit_medicalrecords.php?id=<?php echo $record['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="delete_medicalrecords.php?id=<?php echo $record['id']; ?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                        <p>No medical records found.</p>
+                    <?php endif; ?>
+                    <a href="add_medicalrecords.php" class="btn btn-primary">Add Record</a>
+                </div>
             </main>
         </div>
     </div>
@@ -121,3 +308,8 @@ $result = $stmt->get_result();
     <script src="./js/index.js"></script>
 </body>
 </html>
+
+<?php
+$stmt_accepted_appointments->close();
+$conn->close();
+?>

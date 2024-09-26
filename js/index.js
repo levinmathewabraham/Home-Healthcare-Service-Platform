@@ -120,3 +120,8 @@ $(document).ready(function() {
         handleRegisterFormSubmit();
     });
 });
+
+function updateStatus(newStatus, appointmentId) {
+    // Send a form submission (assuming you have a form element)
+    document.getElementById('appointment_status_form_' + appointmentId).submit();
+}
