@@ -21,12 +21,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment_id'])) {
         }
         $stmt_accept->close();
     } elseif (isset($_POST['ignore'])) {
-        // Simply ignore, allowing another doctor to accept
-        $_SESSION['flash_message'] = 'Appointment ignored';
-        $_SESSION['flash_type'] = 'info';
+        // Remove the appointment from the current doctor and make it available to others
+        $stmt_ignore = $conn->prepare("UPDATE appointments SET accepted_by_doctor_id = NULL, is_accepted = 0 WHERE id = ?");
+        $stmt_ignore->bind_param('i', $appointment_id);
+    
+        if ($stmt_ignore->execute()) {
+            $_SESSION['flash_message'] = 'Appointment ignored';
+            $_SESSION['flash_type'] = 'info';
+        } else {
+            $_SESSION['flash_message'] = 'Error ignoring appointment';
+            $_SESSION['flash_type'] = 'danger';
+        }
+        $stmt_ignore->close();
     }
 
-    // Redirect back to the doctor's dashboard
     header('Location: dashboard_doctor.php');
     exit();
 }
