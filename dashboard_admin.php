@@ -209,6 +209,7 @@ $result_medicalrecords = $conn->query($query_medicalrecords);
                                     </form>
                                 </td>
                                 <td>
+                                    <a href="edit_appointment.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <form action="delete_appointment.php?id=<?php echo $row['id']; ?>" method="POST" onsubmit="return confirm('Are you sure?');">
                                         <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

@@ -264,25 +264,25 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                         <?php if ($result_medicalrecords->num_rows > 0): ?>
                             <table class="table">
                             <thead>
-        <tr>
-            <th>Visit Date</th>
-            <th>Doctor</th>
-            <th>Diagnosis</th>
-            <th>Treatment</th>
-            <th>Prescription</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php while ($row = $result_medicalrecords->fetch_assoc()): ?>
-            <tr>
-                <td><?php echo $row['visit_date']; ?></td>
-                <td><?php echo $row['doctor_name']; ?></td>
-                <td><?php echo $row['diagnosis']; ?></td>
-                <td><?php echo $row['treatment']; ?></td>
-                <td><?php echo $row['prescription']; ?></td>
-            </tr>
-        <?php endwhile; ?>
-    </tbody>
+                                <tr>
+                                    <th>Visit Date</th>
+                                    <th>Doctor</th>
+                                    <th>Diagnosis</th>
+                                    <th>Treatment</th>
+                                    <th>Prescription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $result_medicalrecords->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo $row['visit_date']; ?></td>
+                                        <td><?php echo $row['doctor_name']; ?></td>
+                                        <td><?php echo $row['diagnosis']; ?></td>
+                                        <td><?php echo $row['treatment']; ?></td>
+                                        <td><?php echo $row['prescription']; ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
                             </table>
                         <?php else: ?>
                             <p>No medical records found.</p>

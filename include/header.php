@@ -42,10 +42,10 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./dashboard_redirect.php">DASHBOARD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">SERVICES</a>
+                            <a class="nav-link" href="./services.php">SERVICES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">ABOUT</a>
+                            <a class="nav-link" href="./about.php">ABOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">CONTACT</a>
@@ -60,10 +60,10 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./dashboard_redirect.php">DASHBOARD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">SERVICES</a>
+                            <a class="nav-link" href="./services.php">SERVICES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">ABOUT</a>
+                            <a class="nav-link" href="./about.php">ABOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">CONTACT</a>

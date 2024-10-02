@@ -107,6 +107,7 @@ $conn->close();
             <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select name="status" id="status" class="form-select" required>
+                    <option value="scheduled" <?php if ($appointment['status'] == 'pending') echo 'selected'; ?>>Pending</option>
                     <option value="scheduled" <?php if ($appointment['status'] == 'scheduled') echo 'selected'; ?>>Scheduled</option>
                     <option value="completed" <?php if ($appointment['status'] == 'completed') echo 'selected'; ?>>Completed</option>
                     <option value="canceled" <?php if ($appointment['status'] ==  'canceled') echo 'selected'; ?>>Canceled</option>

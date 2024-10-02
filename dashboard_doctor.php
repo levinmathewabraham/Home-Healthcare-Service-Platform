@@ -15,6 +15,12 @@ $total_today_appointments = $result_today_appointments->fetch_assoc()['total'];
 
 //Fetch doctor details or any necessary data
 $doctor_id = $_SESSION['user_id'];
+$query_doctors = "SELECT * FROM users WHERE id = ?";
+$stmt = $conn->prepare($query_doctors);
+$stmt->bind_param('i', $doctor_id);
+$stmt->execute();
+$result_doctors = $stmt->get_result();
+$doctor = $result_doctors->fetch_assoc();
 
 //Fetch all appointments linked to the doctor
 $query_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, appointments.status, patients.fullname AS patient_name 
@@ -185,13 +191,47 @@ while ($row = $result_medicalrecords->fetch_assoc()) {
                     </div>
                 </div>
                 <div class="container">
-                <?php if (isset($_SESSION['success'])): ?>
-                    <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
-                <?php endif; ?>
-                
-                <?php if (isset($_SESSION['error'])): ?>
-                    <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
-                <?php endif; ?>
+                    <div class="profile-management">
+                        <h3>Profile Management</h3>
+                        <button class="btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#editProfileModal">Edit Profile</button>
+                        <div class="modal fade" tabindex="-1" id="editProfileModal" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="editProfileModalLabel">Edit Profile</h3>
+                                    </div>
+                                    <form action="update_profile.php" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="fullname" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo htmlspecialchars($doctor['fullname']); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="form-label">Username</label>
+                                                <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($doctor['username']); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone" class="form-label">Email</label>
+                                                <input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($doctor['email']); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+                    <?php endif; ?>
+                    
                     <h2>My Appointments</h2>
                     <?php if ($result_accepted_appointments->num_rows > 0): ?>
                         <table class="table">
