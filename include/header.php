@@ -25,8 +25,8 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
     <nav class="navbar navbar-expand-md">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./images/new-logo.png" alt="logo-image" class="logo d-inline-block align-top">
+            <a class="navbar-brand" href="./index.php">
+                Home Healthcare <br>Service
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./dashboard_redirect.php">DASHBOARD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./services.php">SERVICES</a>
+                            <a class="nav-link" href="./doctor_profiles.php">DOCTORS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./about.php">ABOUT</a>
@@ -60,7 +60,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./dashboard_redirect.php">DASHBOARD</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./services.php">SERVICES</a>
+                            <a class="nav-link" href="./doctor_profiles.php">DOCTORS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./about.php">ABOUT</a>

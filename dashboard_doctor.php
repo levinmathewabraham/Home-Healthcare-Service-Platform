@@ -13,7 +13,7 @@ $query_today_appointments = "SELECT COUNT(*) AS total FROM appointments WHERE ap
 $result_today_appointments = $conn->query($query_today_appointments);
 $total_today_appointments = $result_today_appointments->fetch_assoc()['total'];
 
-//Fetch doctor details or any necessary data
+//Fetch doctor details
 $doctor_id = $_SESSION['user_id'];
 $query_doctors = "SELECT * FROM users WHERE id = ?";
 $stmt = $conn->prepare($query_doctors);
@@ -44,7 +44,7 @@ while ($row = $result_appointments->fetch_assoc()) {
     $appointments[] = $row;
 }
 
-// Fetch only the appointments that the doctor has accepted
+// Fetch accepted appointments
 $query_accepted_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, appointments.status,
                                        patients.fullname AS patient_name 
                                 FROM appointments
@@ -70,8 +70,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment_id'], $_PO
     }
 
     $stmt->close();
+    header('Location: dashboard_doctor.php');
+    exit();
+}
 
-    // Redirect back to the dashboard to refresh the appointment list
+// Handle "ignore" button click
+if (isset($_POST['ignore_appointment'])) {
+    $appointment_id = $_POST['ignore_appointment'];
+
+    // Update the appointment status to "pending"
+    $stmt = $conn->prepare("UPDATE appointments SET status = 'pending', accepted_by_doctor_id = NULL, ignored_by_selected_doctor = 1 WHERE id = ?");
+    $stmt->bind_param("i", $appointment_id);
+
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Appointment ignored successfully.";
+    } else {
+        $_SESSION['error'] = "Error ignoring appointment!";
+    }
+
+    $stmt->close();
     header('Location: dashboard_doctor.php');
     exit();
 }
@@ -95,14 +112,13 @@ $result = $stmt_appointments->get_result();
 $nextAppointment = $result->fetch_assoc();
 
 // Fetch pending appointments
-$query_pending_appointments = "SELECT * FROM appointments WHERE status = 'pending'";
-$result_pending_appointments = $conn->query($query_pending_appointments);
+$query_pendingappointments = "SELECT * FROM appointments WHERE status = 'pending'";
+$result_pendingappointments = $conn->query($query_pendingappointments);
 
-// Fetch pending appointments where no doctor has accepted yet
 $query_pending_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, patients.fullname AS patient_name 
-                               FROM appointments
-                               JOIN users AS patients ON appointments.patient_id = patients.id
-                               WHERE appointments.doctor_id = ? AND appointments.is_accepted = 0";
+                                FROM appointments
+                                JOIN users AS patients ON appointments.patient_id = patients.id
+                                WHERE appointments.doctor_id = ? AND appointments.is_accepted = 0";
 $stmt_pending_appointments = $conn->prepare($query_pending_appointments);
 $stmt_pending_appointments->bind_param('i', $_SESSION['user_id']); // Assuming the logged-in doctor
 $stmt_pending_appointments->execute();
@@ -290,7 +306,7 @@ while ($row = $result_medicalrecords->fetch_assoc()) {
                                             <form method="POST" action="manage_appointment.php">
                                                 <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
                                                 <button type="submit" name="accept" class="btn btn-success">Accept</button>
-                                                <button type="submit" name="ignore" class="btn btn-danger">Ignore</button>
+                                                <button type="submit" name="ignore_appointment" id="ignore_appointment" class="btn btn-danger">Ignore</button>
                                             </form>
                                         </td>
                                     </tr>

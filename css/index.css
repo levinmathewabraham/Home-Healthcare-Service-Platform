@@ -44,6 +44,10 @@ main {
     border-radius: 30px;
 }
 
+.navbar-brand {
+    color: white;
+}
+
 .navbar-nav .nav-link {
     color: white;
     margin-right: 15px;
@@ -139,6 +143,11 @@ main {
 /* Doctors - index */
 #doctors-section h2 {
     font-size: 3rem;
+}
+
+.more-doctors-btn {
+    background-color: #35A29F;
+    color: white;
 }
 
 /* Dashboard */

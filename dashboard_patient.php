@@ -175,7 +175,7 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                                             <?php
                                             $result = $conn->query("SELECT id, fullname FROM users WHERE role = 'doctor'");
                                             while ($row = $result->fetch_assoc()) {
-                                                echo "<option value = '{$row['id']}'>{$row['fullname']}</option>";
+                                                echo "<option value = '{$row['id']}'>Dr. {$row['fullname']}</option>";
                                             }
                                             ?>
                                         </select>
