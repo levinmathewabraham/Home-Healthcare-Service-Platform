@@ -86,9 +86,10 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <div class="card-body">
-                                        <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">General Practitioner</h3>
+                                        <img src="./images/sreehari_cs.jpg" style="border-radius: 50%; width: 170px;">
+                                        <h3 class="mt-4 display-6 lh-1 fw-bold">General Practitioner</h3>
                                         <h4>Dr. Sreehari C S</h4>
-                                        <p class="mx-5 mb-5">Dr. Sreehari C S provides general medical consultations and treatments.</p>
+                                        <p class="mx-5">Dr. Sreehari C S provides general medical consultations and treatments.</p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-body-secondary">sreehari.doc@hhs.org <br> +91 4325621734</small>
@@ -100,9 +101,10 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <div class="card-body">
-                                        <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Ophthalmologist</h3>
+                                        <img src="./images/saju_p_varghese.jpg" style="border-radius: 50%; width: 170px;">
+                                        <h3 class="mt-4 display-6 lh-1 fw-bold">Ophthalmologist</h3>
                                         <h4>Dr. Saju P Varghese</h4>
-                                        <p class="mx-5 mb-5">Dr. Saju P Varghese specializes in eye care and vision correction surgeries.</p>
+                                        <p class="mx-5">Dr. Saju P Varghese specializes in eye care and vision correction surgeries.</p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-body-secondary">saju.doc@hhs.org <br> +91 7561637123</small>
@@ -114,9 +116,10 @@
                             <div class="card h-100 rounded-4 shadow-lg">
                                 <div class="d-flex flex-column h-100">
                                     <div class="card-body">
-                                        <h3 class="mt-5 pt-5 display-6 lh-1 fw-bold">Orthopedic Surgeon</h3>
+                                        <img src="./images/liam_smith.jpg" style="border-radius: 50%; width: 170px;">
+                                        <h3 class="mt-4 display-6 lh-1 fw-bold">Orthopedic Surgeon</h3>
                                         <h4>Dr. Liam Smith</h4>
-                                        <p class="mx-5 mb-5">Dr. Liam Smith has over 15 years of experience in orthopedic surgeries.</p>
+                                        <p class="mx-5">Dr. Liam Smith has over 15 years of experience in orthopedic surgeries.</p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-body-secondary">liamsmith@hhs.org <br> +91 7452516429</small>

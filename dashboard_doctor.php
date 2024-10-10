@@ -74,25 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment_id'], $_PO
     exit();
 }
 
-// Handle "ignore" button click
-if (isset($_POST['ignore_appointment'])) {
-    $appointment_id = $_POST['ignore_appointment'];
-
-    // Update the appointment status to "pending"
-    $stmt = $conn->prepare("UPDATE appointments SET status = 'pending', accepted_by_doctor_id = NULL, ignored_by_selected_doctor = 1 WHERE id = ?");
-    $stmt->bind_param("i", $appointment_id);
-
-    if ($stmt->execute()) {
-        $_SESSION['success'] = "Appointment ignored successfully.";
-    } else {
-        $_SESSION['error'] = "Error ignoring appointment!";
-    }
-
-    $stmt->close();
-    header('Location: dashboard_doctor.php');
-    exit();
-}
-
 // Fetch appointments and check if a notification has been sent about doctor changes
 $query_new_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, 
                         IF(appointments.accepted_by_doctor_id = doctors.id, 0, 1) AS doctor_changed,
