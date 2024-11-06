@@ -124,9 +124,11 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
             }
             ?>
             <!-- Main Dashboard Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Patient Dashboard</h1>
+            <main class="ms-sm-auto px-md-4">
+                <div class="container">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Patient Dashboard</h1>
+                    </div>
                 </div>
                 <div class="dashboard-content">
                     <div class="container mb-3">
@@ -166,7 +168,7 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                     </div>
                     <div class="container mb-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <h3>Schedule Appointment</h3>
                                 <form action="" method="POST">
                                     <div class="mb-3">
@@ -187,7 +189,7 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                                     <button type="submit" class="btn btn-info">Schedule</button>
                                 </form>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card text-bg-info mb-3 h-100">
                                     <div class="card-header">Upcoming Appointments</div>
                                     <div class="card-body">
@@ -198,24 +200,15 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                                             $firstAppointment = $appointments[0];
                                             echo htmlspecialchars($firstAppointment['appointment_time']) . " on " . htmlspecialchars($firstAppointment['appointment_date']);
                                         } else {
-                                            echo "No upcoming appointments.";
+                                            echo "<br>No upcoming appointments.";
                                         }
                                         ?>
                                     </h5>
-                                        <p class="card-text">Lorem ipsum</p>
+                                        <p class="card-text">Your upcoming appointment will be visible here</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="card text-bg-warning mb-3 h-100">
-                                    <div class="card-header">Pending Payments</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Amount Due: -amount-</h5>
-                                        <p class="card-text">Payment for the last consultation.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card text-bg-success mb-3 h-100">
                                     <div class="card-header">Recent Prescriptions</div>
                                     <div class="card-body">

@@ -8,11 +8,6 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['role'] !== 'doctor') {
     exit();
 }
 
-// Fetch today's appointments count
-$query_today_appointments = "SELECT COUNT(*) AS total FROM appointments WHERE appointment_date = CURDATE()";
-$result_today_appointments = $conn->query($query_today_appointments);
-$total_today_appointments = $result_today_appointments->fetch_assoc()['total'];
-
 //Fetch doctor details
 $doctor_id = $_SESSION['user_id'];
 $query_doctors = "SELECT * FROM users WHERE id = ?";
@@ -21,6 +16,23 @@ $stmt->bind_param('i', $doctor_id);
 $stmt->execute();
 $result_doctors = $stmt->get_result();
 $doctor = $result_doctors->fetch_assoc();
+
+// Fetch today's appointments count
+$query_today_appointments = "SELECT COUNT(*) AS total FROM appointments WHERE appointment_date = CURDATE() AND appointments.doctor_id = ?";
+$stmt_today_appointments = $conn->prepare($query_today_appointments);
+$stmt_today_appointments->bind_param("i", $doctor_id);
+$stmt_today_appointments->execute();
+$result_today_appointments = $stmt_today_appointments->get_result();
+$total_today_appointments = $result_today_appointments->fetch_assoc()['total'];
+
+$query_patients = "SELECT COUNT(DISTINCT patients.fullname) AS total_patients FROM appointments
+                    JOIN users AS patients ON appointments.patient_id = patients.id
+                    WHERE appointments.doctor_id = ?";
+$stmt_patients = $conn->prepare($query_patients);
+$stmt_patients->bind_param("i", $doctor_id);
+$stmt_patients->execute();
+$result_patients = $stmt_patients->get_result();
+$patients = $result_patients->fetch_assoc()['total_patients'];
 
 //Fetch all appointments linked to the doctor
 $query_appointments = "SELECT appointments.id, appointments.appointment_date, appointments.appointment_time, appointments.status, patients.fullname AS patient_name 
@@ -152,36 +164,29 @@ while ($row = $result_medicalrecords->fetch_assoc()) {
 
             
             <!-- Main Dashboard Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Doctor Dashboard</h1>
-                </div>
-                <div class="dashboard-content">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card text-bg-info mb-3">
-                                <div class="card-header">Appointments</div>
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($total_today_appointments); ?></h5>
-                                    <p class="card-text">Upcoming appointments for today.</p>
+            <main class="ms-sm-auto px-md-4">
+                <div class="container">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Doctor Dashboard</h1>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card text-bg-info mb-3">
+                                    <div class="card-header">Appointments</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo htmlspecialchars($total_today_appointments); ?></h5>
+                                        <p class="card-text">Upcoming appointments for today.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card text-bg-warning mb-3">
-                                <div class="card-header">Pending Prescriptions</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">-prescriptions count-</h5>
-                                    <p class="card-text">Prescriptions to review and approve.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card text-bg-success mb-3">
-                                <div class="card-header">Appointed Patients</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">-patients count-</h5>
-                                    <p class="card-text">Total number of patients under your care.</p>
+                            <div class="col-md-6">
+                                <div class="card text-bg-success mb-3">
+                                    <div class="card-header">Appointed Patients</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo htmlspecialchars($patients); ?></h5>
+                                        <p class="card-text">Total number of patients under your care.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
