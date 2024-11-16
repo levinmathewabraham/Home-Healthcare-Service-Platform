@@ -77,6 +77,20 @@ $stmt_medicalrecords = $conn->prepare($query_medicalrecords);
 $stmt_medicalrecords->bind_param('i', $patient_id);
 $stmt_medicalrecords->execute();
 $result_medicalrecords = $stmt_medicalrecords->get_result();
+
+
+// Fetch recent prescriptions from medical records for this patient
+$query_prescriptions = "SELECT medical_records.prescription, medical_records.visit_date, doctors.fullname AS doctor_name 
+                        FROM medical_records
+                        JOIN users AS doctors ON medical_records.doctor_id = doctors.id 
+                        WHERE medical_records.patient_id = ? 
+                        ORDER BY medical_records.visit_date DESC 
+                        LIMIT 1";
+$stmt_prescriptions = $conn->prepare($query_prescriptions);
+$stmt_prescriptions->bind_param('i', $patient_id);
+$stmt_prescriptions->execute();
+$result_prescriptions = $stmt_prescriptions->get_result();
+$prescription = $result_prescriptions->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -212,8 +226,13 @@ $result_medicalrecords = $stmt_medicalrecords->get_result();
                                 <div class="card text-bg-success mb-3 h-100">
                                     <div class="card-header">Recent Prescriptions</div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Prescription from -date-</h5>
-                                        <p class="card-text">-prescription details-</p>
+                                        <?php if ($prescription): ?>
+                                            <h5 class="card-title">Prescription from <?php echo htmlspecialchars(date('M d, Y', strtotime($prescription['visit_date']))); ?></h5>
+                                            <p>By Dr. <?php echo htmlspecialchars($prescription['doctor_name']); ?></p>
+                                            <p class="card-text"><?php echo htmlspecialchars($prescription['prescription']); ?></p>
+                                        <?php else: ?>
+                                            <p class="card-text">No recent prescriptions found.</p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

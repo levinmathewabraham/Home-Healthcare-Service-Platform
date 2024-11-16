@@ -20,6 +20,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         // Admin can delete any appointment
         $stmt = $conn->prepare("DELETE FROM appointments WHERE id = ?");
         $stmt->bind_param('i', $appointment_id);
+    } elseif ($role === 'doctor') {
+        // Doctors can only delete their own appointments
+        $stmt = $conn->prepare("DELETE FROM appointments WHERE id = ? AND doctor_id = ?");
+        $stmt->bind_param('ii', $appointment_id, $user_id);
     } else if ($role === 'patient') {
         // Patients can only delete their own appointments
         $stmt = $conn->prepare("DELETE FROM appointments WHERE id = ? AND patient_id = ?");
@@ -43,8 +47,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $_SESSION['flash_type'] = 'danger';
     }
 
-    // Redirect to the appropriate dashboard
-    $redirect_page = ($role === 'admin') ? 'dashboard_admin.php' : 'dashboard_patient.php';
+    // Redirect to the appropriate dashboard (admin, doctor, or patient)
+    $redirect_page = ($role === 'admin') ? 'dashboard_admin.php' : ($role === 'doctor' ? 'dashboard_doctor.php' : 'dashboard_patient.php');
     header("Location: $redirect_page");
     exit();
 

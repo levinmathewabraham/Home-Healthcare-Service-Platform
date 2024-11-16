@@ -292,7 +292,7 @@ while ($row = $result_medicalrecords->fetch_assoc()) {
                                             <form method="POST" action="manage_appointment.php">
                                                 <input type="hidden" name="appointment_id" value="<?php echo $appointment['id']; ?>">
                                                 <button type="submit" name="accept" class="btn btn-success">Accept</button>
-                                                <button type="submit" name="ignore_appointment" id="ignore_appointment" class="btn btn-danger">Ignore</button>
+                                                <a href="delete_appointment.php?id=<?php echo $appointment['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</a>
                                             </form>
                                         </td>
                                     </tr>
