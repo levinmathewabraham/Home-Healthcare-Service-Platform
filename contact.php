@@ -29,7 +29,7 @@
                                 <p class="card-text">
                                     123 Healthcare Street<br>
                                     Medical District<br>
-                                    Kuala Lumpur, 50450
+                                    Kottayam, 50450
                                 </p>
                             </div>
                         </div>
@@ -40,8 +40,8 @@
                                 <i class="bi bi-telephone fs-1 text-primary mb-3"></i>
                                 <h3 class="card-title h4">Phone</h3>
                                 <p class="card-text">
-                                    Main: (03) 1234-5678<br>
-                                    Emergency: (03) 8765-4321
+                                    Main: +91 1234567890<br>
+                                    Emergency: +91 9876543210
                                 </p>
                             </div>
                         </div>
@@ -52,8 +52,8 @@
                                 <i class="bi bi-envelope fs-1 text-primary mb-3"></i>
                                 <h3 class="card-title h4">Email</h3>
                                 <p class="card-text">
-                                    info@homehealthcare.com<br>
-                                    support@homehealthcare.com
+                                    info@hhs.org<br>
+                                    help@hhs.org
                                 </p>
                             </div>
                         </div>
