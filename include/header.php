@@ -48,7 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./about.php">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">CONTACT</a>
+                            <a class="nav-link" href="./contact.php">CONTACT</a>
                         </li>
                     </ul>
                     <!-- For screen size lesser than medium(md) -->
@@ -66,7 +66,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link" href="./about.php">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">CONTACT</a>
+                            <a class="nav-link" href="/contact.php">CONTACT</a>
                         </li>
                     </ul>
                 </div>

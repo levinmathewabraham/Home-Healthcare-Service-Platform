@@ -113,7 +113,7 @@ $conn->close();
     <!-- Include header section -->
     <?php require_once './include/header.php' ?>
 
-    <div class="wrapper">
+    <div class="registerLogin-section wrapper">
         <main class="form-signin w-100 m-auto">
             <form action="./login.php" method="POST" novalidate>
                 <h1 class="h3 mb-3 fw-normal">Sign In</h1>

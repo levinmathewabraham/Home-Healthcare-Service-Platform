@@ -6,6 +6,7 @@ html,body{
     height: 100%;
     display: flex;
     flex-direction: column;
+
 }
 
 .wrapper {
@@ -18,6 +19,13 @@ html,body{
 main {
     padding: 2rem;
     flex-grow: 1;
+}
+
+.main-section {
+    background: url('../images/img2.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* Header */
@@ -67,6 +75,12 @@ main {
 }
 
 /* Register & Login */
+.registerLogin-section {
+    background: url('../images/img1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 .loginRegister > a {
     background-color: #f1f1f1;
     text-decoration: none;
@@ -166,6 +180,13 @@ main {
 
 .patient-greeting {
     text-align: center;
+}
+
+#about-section, #contact-section, .doctorMain-section {
+    background: url('../images/img4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* Footer */
