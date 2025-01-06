@@ -26,6 +26,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">General Practitioner</h3>
                                     <h4>Dr. Sreehari C S</h4>
                                     <p class="mx-5">Dr. Sreehari C S provides general medical consultations and treatments.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 8:00 AM - 8:00 PM <br>Sat: 9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">sreehari.doc@hhs.org <br> +91 4325621734</small>
@@ -41,6 +43,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Ophthalmologist</h3>
                                     <h4>Dr. Saju P Varghese</h4>
                                     <p class="mx-5">Dr. Saju P Varghese specializes in eye care and vision correction surgeries.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 12:00 PM - 8:00 PM <br>Sat: 11:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">saju.doc@hhs.org <br> +91 7561637123</small>
@@ -56,6 +60,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Cardiologist</h3>
                                     <h4>Dr. James Rodriguez</h4>
                                     <p class="mx-5">Dr. James Rodriguez is a renowned cardiologist with over 20 years of experience.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 9:00 AM - 6:00 PM <br>Sat: 10:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">james.doc@hhs.org <br> +91 9472537583</small>
@@ -71,6 +77,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Neurologist</h3>
                                     <h4>Dr. Sarah Williams</h4>
                                     <p class="mx-5">Dr. Sarah Williams is an expert in neurological disorders.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 11:00 AM - 7:00 PM <br>Sat: 9:00 AM - 2:30 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">sarahw@hhs.org <br> +91 8264526443</small>
@@ -83,9 +91,11 @@
                             <div class="d-flex flex-column h-100">
                                 <div class="card-body">
                                     <img src="./images/emily_brown.jpg" style="border-radius: 50%; width: 170px;">
-                                    <h3 class="mt-4 display-6 lh-1 fw-bold">Pediatrician</h3>
+                                    <h3 class="mt-4 display-6 lh-1 fw-bold">Paediatrician</h3>
                                     <h4>Dr. Emily Brown</h4>
                                     <p class="mx-5">Dr. Emily Brown specializes in child healthcare and development.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 2:00 PM - 8:00 PM <br>Sat: 10:30 AM - 4:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">emily@hhs.org <br> +91 8263619532</small>
@@ -101,6 +111,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Dermatologist</h3>
                                     <h4>Dr. Alex Johnson</h4>
                                     <p class="mx-5">Dr. Alex Johnson treats various skin disorders and diseases.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 8:00 AM - 12:00 PM, 3:00 PM - 8:00 PM <br>Sat: 11:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">alex@hhs.org <br> +91 8936263483</small>
@@ -116,6 +128,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Orthopedic Surgeon</h3>
                                     <h4>Dr. Liam Smith</h4>
                                     <p class="mx-5">Dr. Liam Smith has over 15 years of experience in orthopedic surgeries.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 8:00 AM - 12:00 PM, 2:00 PM - 7:00 PM <br>Sat: 9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">liam@hhs.org <br> +91 7452516429</small>
@@ -131,6 +145,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Gynecologist</h3>
                                     <h4>Dr. Olivia Davis</h4>
                                     <p class="mx-5">Dr. Olivia Davis is a specialist in women's health and maternity care.</p>
+                                    <br>
+                                    <p>Availability: <br> Mon - Fri: 8:00 AM - 11:00 AM, 4:00 PM - 8:00 PM <br>Sat: 9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">olivia@hhs.org <br> +91 4628391942</small>
@@ -146,6 +162,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Oncologist</h3>
                                     <h4>Dr. Mason Taylor</h4>
                                     <p class="mx-5">Dr. Mason Taylor specializes in cancer treatment and therapies.</p>
+                                    <br>
+                                    <p>Availability: Mon - Fri: 8:00 AM - 8:00 PM <br>Sat: 9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">mason@hhs.org <br> +91 9472637582</small>
@@ -161,6 +179,8 @@
                                     <h3 class="mt-4 display-6 lh-1 fw-bold">Psychiatrist</h3>
                                     <h4>Dr. Sophia Martinez</h4>
                                     <p class="mx-5">Dr. Sophia Martinez is an expert in mental health and psychiatry.</p>
+                                    <br>
+                                    <p>Availability: Mon - Fri: 8:00 AM - 8:00 PM <br>Sat: 9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary">sophia@hhs.org <br> +91 8263673843</small>
